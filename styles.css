@@ -1,13 +1,16 @@
 :root {
-    --primary: #8b5cf6;
-    --primary-hover: #7c3aed;
-    --secondary: #ec4899;
-    --bg-dark: #0f172a;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --highlight: #fde047;
+    --primary: #2563eb;       /* Royal Blue - Formal */
+    --primary-hover: #1d4ed8;
+    --secondary: #0f172a;     /* Dark Slate */
+    --bg-light: #f8fafc;      /* Very light gray background */
+    --content-bg: #ffffff;    /* Pure white for content areas */
+    --border-color: #e2e8f0;  /* Light gray border */
+    --text-main: #1e293b;     /* Dark gray for main text */
+    --text-muted: #475569;    /* Medium gray for descriptions */
+    --code-bg: #f1f5f9;       /* Light gray for prompt box */
+    --code-text: #0f172a;     /* Darkest gray for code text */
+    --highlight-bg: #fef08a;  /* Soft yellow highlight */
+    --highlight-text: #854d0e;/* Dark brown/orange for highlight text */
 }
 
 * {
@@ -18,29 +21,15 @@
 
 body {
     font-family: 'Prompt', sans-serif;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-light);
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Animated Gradient Background */
+/* Remove animated dark background, replace with clean flat background */
 .bg-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    background: linear-gradient(45deg, #0f172a, #1e1b4b, #31135e, #170f36);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    display: none;
 }
 
 /* Top Tabs */
@@ -50,39 +39,39 @@ body {
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
+    background: var(--content-bg);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .tab-btn {
     background: transparent;
     color: var(--text-muted);
     border: 1px solid transparent;
-    padding: 0.75rem 2rem;
-    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
     font-family: 'Prompt', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .tab-btn:hover {
     color: var(--text-main);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-light);
 }
 
 .tab-btn.active {
-    color: #fff;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    color: var(--primary);
+    background: #eff6ff; /* Light blue background */
+    border: 1px solid #bfdbfe;
+    font-weight: 600;
 }
 
 /* Layout */
@@ -97,9 +86,8 @@ body {
 /* Sidebar */
 .sidebar {
     width: 300px;
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid var(--glass-border);
+    background: var(--content-bg);
+    border-right: 1px solid var(--border-color);
     position: fixed;
     height: calc(100vh - 70px);
     top: 70px;
@@ -109,16 +97,21 @@ body {
 }
 
 .sidebar-header {
-    padding: 0 2rem 2rem;
-    border-bottom: 1px solid var(--glass-border);
-    margin-bottom: 2rem;
+    padding: 0 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
 }
 
 .sidebar-header h2 {
-    background: linear-gradient(to right, #a78bfa, #f472b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--primary);
     font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.sidebar-header p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
 .nav-menu {
@@ -127,22 +120,24 @@ body {
 }
 
 .nav-link {
-    padding: 1rem 2rem;
+    padding: 0.75rem 2rem;
     color: var(--text-muted);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     border-left: 3px solid transparent;
+    font-size: 0.95rem;
 }
 
 .nav-link:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-light);
     color: var(--text-main);
 }
 
 .nav-link.active {
-    color: var(--text-main);
-    border-left-color: var(--secondary);
-    background: linear-gradient(90deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%);
+    color: var(--primary);
+    border-left-color: var(--primary);
+    background: #eff6ff;
+    font-weight: 500;
 }
 
 /* Main Content */
@@ -153,29 +148,30 @@ body {
 }
 
 .content-header {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     text-align: center;
 }
 
 .content-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(to right, #a78bfa, #f472b6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+.content-header p {
+    color: var(--text-muted);
 }
 
 /* Prompt Sections */
 .prompt-section {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
+    background: var(--content-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
     padding: 2.5rem;
     margin-bottom: 3rem;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     position: relative;
-    overflow: hidden;
 }
 
 .prompt-section::before {
@@ -185,25 +181,25 @@ body {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    opacity: 0.7;
+    background: var(--primary);
+    border-radius: 12px 12px 0 0;
 }
 
 .section-badge {
     position: absolute;
     top: 2rem;
     right: 2rem;
-    background: rgba(139, 92, 246, 0.2);
-    color: #c4b5fd;
+    background: #eff6ff;
+    color: var(--primary);
     padding: 0.25rem 1rem;
     border-radius: 20px;
     font-size: 0.875rem;
     font-weight: 600;
-    border: 1px solid rgba(139, 92, 246, 0.4);
+    border: 1px solid #bfdbfe;
 }
 
 .prompt-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     margin-bottom: 0.5rem;
     color: var(--text-main);
 }
@@ -211,18 +207,19 @@ body {
 .section-desc {
     color: var(--text-muted);
     margin-bottom: 1.5rem;
+    font-size: 0.95rem;
 }
 
 /* Inputs */
 .input-panel {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
+    background: var(--bg-light);
+    border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-    border: 1px dashed var(--glass-border);
+    border: 1px solid var(--border-color);
 }
 
 .input-group {
@@ -233,24 +230,24 @@ body {
 
 .input-group label {
     font-size: 0.875rem;
-    color: var(--text-muted);
-    font-weight: 500;
+    color: var(--text-main);
+    font-weight: 600;
 }
 
 .input-group input, .input-group textarea {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid var(--glass-border);
+    background: var(--content-bg);
+    border: 1px solid var(--border-color);
     color: var(--text-main);
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: 6px;
     font-family: 'Prompt', sans-serif;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .input-group input:focus, .input-group textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .input-group textarea {
@@ -261,25 +258,26 @@ body {
 /* Prompt Box */
 .prompt-box {
     position: relative;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 12px;
-    padding: 2rem 2rem 4rem 2rem;
-    border: 1px solid var(--glass-border);
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 1.5rem 1.5rem 4rem 1.5rem;
+    border: 1px solid var(--border-color);
 }
 
 pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     font-family: 'Prompt', sans-serif;
-    color: #e2e8f0;
-    line-height: 1.8;
+    color: var(--code-text);
+    line-height: 1.7;
+    font-size: 0.95rem;
 }
 
 .highlight {
-    color: var(--highlight);
-    font-weight: 500;
-    background: rgba(253, 224, 71, 0.1);
-    padding: 0 4px;
+    color: var(--highlight-text);
+    font-weight: 600;
+    background: var(--highlight-bg);
+    padding: 2px 6px;
     border-radius: 4px;
 }
 
@@ -288,33 +286,31 @@ pre {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     font-family: 'Prompt', sans-serif;
     font-weight: 500;
+    font-size: 0.9rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-}
-
-.btn-copy svg {
-    width: 18px;
-    height: 18px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
 }
 
 .btn-copy:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
 }
 
 .btn-copy:active {
     transform: translateY(0);
+}
+
+h3 {
+    color: var(--secondary) !important;
 }
 
 /* Responsive */
@@ -346,7 +342,7 @@ pre {
         top: 0;
         padding: 1rem;
         border-right: none;
-        border-bottom: 1px solid var(--glass-border);
+        border-bottom: 1px solid var(--border-color);
     }
     .main-content {
         margin-left: 0;
@@ -361,11 +357,12 @@ pre {
     .nav-link {
         border-left: none;
         border-bottom: 3px solid transparent;
+        padding: 0.75rem 1rem;
     }
     .nav-link.active {
         border-left-color: transparent;
-        border-bottom-color: var(--secondary);
-        background: linear-gradient(0deg, rgba(236, 72, 153, 0.1) 0%, transparent 100%);
+        border-bottom-color: var(--primary);
+        background: #eff6ff;
     }
     .prompt-section {
         padding: 1.5rem;
